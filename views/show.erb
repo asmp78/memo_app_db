@@ -1,0 +1,10 @@
+<h2 class="memo_title"><%= @memo[0]["title"] %></h2>
+<p class="memo_body"><%= @memo[0]["body"].gsub(/\R/, "<br/>") %></p>
+<div class="btn_items">
+  <form method="post" action="/<%= @memo[0]["id"] %>">
+    <a class="btn" href="/<%= @memo[0]["id"] %>/edit" role="button">編集</a>
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" class="btn" value="削除">
+    <a class="btn" href="/" role="button">TOP</a>
+  </form>
+</div>
