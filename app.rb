@@ -16,23 +16,23 @@ class Memo
   @@connection = PG.connect(host: "localhost", user: "postgres", dbname: "memo_app", port: "5432")
 
   def self.all
-    @@connection.exec("SELECT * FROM Memo;")
+    @@connection.exec("SELECT * FROM Memo")
   end
 
   def self.find(id)
-    @@connection.exec("SELECT * FROM Memo WHERE id = #{id};")
+    @@connection.exec("SELECT * FROM Memo WHERE id = $1", [id])
   end
 
   def self.write(title: title, body: body)
-    @@connection.exec("INSERT INTO Memo (title, body) VALUES ('#{title}', '#{body}');")
+    @@connection.exec("INSERT INTO Memo (title, body) VALUES ($1, $2)", [title, body])
   end
 
   def edit(id: id, title: title, body: body)
-    @@connection.exec("UPDATE Memo SET title = '#{title}', body = '#{body}' WHERE id = '#{id}';")
+    @@connection.exec("UPDATE Memo SET title = $1, body = $2 WHERE id = $3", [title, body, id])
   end
 
   def delete(id)
-    @@connection.exec("DELETE FROM Memo WHERE id = #{id};")
+    @@connection.exec("DELETE FROM Memo WHERE id = $1", [id])
   end
 end
 
